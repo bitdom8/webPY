@@ -1,0 +1,35 @@
+﻿{% extends "blog/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<form method="POST" enctype="multipart/form-data">
+  <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+  <h2 class="account-heading">{{ user.username }}</h2>
+  {% csrf_token %}
+  {{ form|crispy }}
+
+  <table class="table table-responsive">
+    {% if data %}
+    <td>{{  data  }} </td>
+    {% else %}
+    <p>No query is construed yet</p>
+    {% endif %}
+
+
+    {% if data2 %}
+      {% for data2 in data2 %}
+      <p>{{ data2.image.url }}</p>
+      <p><img class="img-thumbnail" src="{{ data2.image.url }}"></p>
+      {% endfor %}
+      {% else %}
+      <p>Nothing in pictures</p>
+    {% endif %}
+
+    <!-- <img class="rounded-circle account-img" src="{{ data2 }}"> -->
+    <button type="submit" class="btn btn-info">Upload</button>
+  </table>
+  
+</form>
+
+<p><a href="{% url 'home' %}">Return to home</a></p>
+{% endblock %}

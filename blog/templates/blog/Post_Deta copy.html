@@ -1,0 +1,46 @@
+﻿{% extends "blog/base.html" %}
+
+{% load static %} <!--is this about display if post.image -->
+
+{% block content %}
+<article class="media content-section">
+    <img class="rounded-circle article-img" src='{{ post.author.profile.image.url}}'>
+    <div class="media-body">
+    <div class="article-metadata">
+      <a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>
+      <small class="text-m"uted">{{ post.date_posted|date:"d/m/Y  G:i" }}</small>
+
+      <p>
+
+      </p>
+      
+      <h2><a class="article-title" href="{% url "post-detail" post.id %}">{{ post.title }}</a></h2>
+      <p class="article-content">{{ post.content }}</p>
+
+      {% if post.thumbnail %}
+      <article class="media content-section">
+        <img src={{ post.thumbnail.url }} img style='height: 100%; width: 100%; object-fit: contain'/>
+      </article>
+      {% endif %}
+
+
+
+
+
+
+      {% if post.author == user %}
+        <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url "post-update" post.id %}">Update</a>
+      <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url "post-delete" post.id %}">Delete</a>
+      
+
+      {% endif %}
+
+
+
+
+    </div>
+
+  </article>
+
+
+{% endblock content %}

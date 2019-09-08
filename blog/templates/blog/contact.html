@@ -1,0 +1,80 @@
+﻿{% extends "blog/base.html" %}
+
+{% load static %}
+<!--is this about display if post.image -->
+
+{% block content %}
+
+<form method="POST" action="/contact/">
+  <div class="form-row">
+    <div class="form-group col-md-12">
+      {% csrf_token %}
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputName"> Name</label>
+      <input name="name" type="text" class="form-control" id="inputName" placeholder="Name">
+    </div>
+    
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-12">
+      <label for="inputEmail4">Email</label>
+      <input name="email" type="email" class="form-control" id="inputEmail4" placeholder="Email">
+    </div>
+  </div>
+
+
+
+  <div class="form-group">
+    <label for="inputAddress">Address</label>
+    <input name="address" type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputCity">City</label>
+      <input name="city" type="text" class="form-control" id="inputCity">
+    </div>
+    
+
+  </div>
+
+  <button type="submit" class="btn btn-primary">Sign in</button>
+</form>
+
+<div class="row d-block">
+  <!-- <p> Email : {{ email | default:"No Email" }}</p>
+<p>Address: {{ address | default:"No Address" }}</p>
+<p>City: {{ City | default:"No City" }}</p>
+<p>Zip: {{ zipcode | default:"No zipcode" }}</p> -->
+
+  <table class="table table-responsive">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Address</th>
+        <th>City</th>
+        <th colspan=2>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {%for row in rows %}
+      <tr>
+      <td>{{row.name}}</td>
+      <td>{{row.email}}</td>
+      <td>{{row.address}}</td>
+      <td>{{row.city}}</td>
+      
+      <td><a href="/contact?id={{row.id}}&method=edit">Edit</a></td>
+      <td><a href="/contact?id={{row.id}}&method=delete">Delete</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+
+  </table>
+
+</div>
+
+{% endblock content %}

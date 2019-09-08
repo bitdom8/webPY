@@ -1,0 +1,35 @@
+﻿{% extends "blog/base.html" %}
+
+{% load static %}
+
+{% block content %}
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+
+<!--simple
+    
+    <input type="file" name="myfile" required>
+    <button type="submit">Upload</button>
+
+  -->
+
+  <a><input type="file" class="btn btn-info" name="myfile" value="Input Button" multiple required></a>
+
+  <button type="submit" class="btn btn-info" name="myfile">Upload</button>
+
+
+  </form>
+
+
+
+
+
+  {% if uploaded_file_url %}
+    <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</p>
+    <img class="rounded-circle account-img" src="{{ uploaded_file_url }}">
+  {% endif %}
+
+
+  <p><a href="{% url 'home' %}">Return to home</a></p>
+{% endblock %}

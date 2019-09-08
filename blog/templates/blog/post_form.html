@@ -1,0 +1,30 @@
+﻿{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+
+
+{% load static %}
+
+{% block content %}
+	<div class ="content-section">
+		<form method ="POST"enctype="multipart/form-data">
+			{% csrf_token %}
+			<fieldset class="form-group">
+				<img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+				<h2 class="account-heading">{{ user.username }}</h2>
+				<legend class="border-bottom mb-4">Blog Post</legend>
+				{{ form|crispy }}
+				
+				<div id="div_id_username" class="form-group"> <label for="id_username" class="col-form-label requiredField">
+				
+				<button class="btn btn-outline-info" type="submit">Post</button>
+				
+				
+				</form>
+				<p><a href="{% url 'home' %}">Return to home</a></p>
+			</fieldset>
+			<div class="form-group"></fieldset>
+			</div>
+		</form>
+  
+	</div>
+{% endblock %}

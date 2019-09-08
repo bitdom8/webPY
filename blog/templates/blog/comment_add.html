@@ -1,0 +1,13 @@
+﻿
+<!--is this about display if post.image -->
+{% load crispy_forms_tags %}
+{% load static %}
+
+<div class="container-fluid">
+    <form class="form-horizontal" method="POST">
+        {% csrf_token %}
+        {{ form|crispy }}
+        {{ form.media }}
+        <input type="submit" class="btn btn-primary" value="Add Comment">
+    </form>
+</div>
